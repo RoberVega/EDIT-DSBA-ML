@@ -14,7 +14,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 def get_data_iris():
-	X, Y = load_iris(True)
+	X, Y = load_iris(return_X_y=True)
 	X = pd.DataFrame(X, columns = ['SEPAL_LENGTH', 'SEPAL_WIDTH', 'PETAL_LENGTH', 'PETAL_WIDTH'])
 	Y = pd.Series(Y, name = 'SPECIES')
 	return X, Y
@@ -274,14 +274,14 @@ def univariate_classifier_logit(X, Y):
 def binary_plotter(X, Y):
     data = pd.concat((X,Y),axis=1)
     data['SPECIES'] = np.where(data.SPECIES == 0, 1, 0)
-    sns.lmplot("PETAL_WIDTH", "SPECIES",data=data, hue="SPECIES", fit_reg=False)
+    sns.lmplot(data=data,x="PETAL_WIDTH",y="SPECIES", hue="SPECIES", fit_reg=False)
 
 
 def multivariate_plot(X, Y):
     data = pd.concat((X,Y),axis=1)
     data = data.loc[data.SPECIES != 0]
     data['SPECIES'] = np.where(data.SPECIES == 2, 1, 0)
-    sns.lmplot("PETAL_WIDTH", "SEPAL_WIDTH",data=data, hue="SPECIES", fit_reg=False)
+    sns.lmplot(data=data,x="PETAL_WIDTH",y="SPECIES", hue="SPECIES", fit_reg=False)
 	#plt.plot(np.linspace(4,8,1000), [0.8]*1000, 'r-')
 
 
